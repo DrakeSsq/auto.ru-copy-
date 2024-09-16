@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from mptt.models import MPTTModel, TreeForeignKey
 from django.utils.crypto import get_random_string
 from transliterate import slugify
@@ -20,6 +21,10 @@ class Transport(MPTTModel):
 
     def __str__(self):
         return self.title
+    
+    def get_absolute_url(self):
+        return reverse("slug1", kwargs={"slug1": self.slug})
+    
 
 class Marka_Legkovoe_Avto(MPTTModel):
     title = models.CharField(max_length=255)
@@ -37,6 +42,10 @@ class Marka_Legkovoe_Avto(MPTTModel):
 
     def __str__(self):
         return self.title
+    
+    
+    def get_absolute_url(self):
+        return reverse("slug2", kwargs={"slug1": self.parent.slug, "slug2": self.slug})
 
 class Model_Legkovoe_Avto(MPTTModel):
     title = models.CharField(max_length=255)
@@ -54,6 +63,10 @@ class Model_Legkovoe_Avto(MPTTModel):
 
     def __str__(self):
         return self.title
+    
+    def get_absolute_url(self):
+        return reverse("slug3", kwargs={"slug1": self.parent.parent.slug, "slug2": self.parent.slug, "slug3":self.slug})
+    
 
 class Legkovoe_Avto(MPTTModel):
     title = models.CharField(max_length=255)
@@ -78,6 +91,11 @@ class Legkovoe_Avto(MPTTModel):
     def __str__(self):
         return self.title
     
+    
+    def get_absolute_url(self):
+        return reverse("slug3", kwargs={"slug1": self.parent.parent.parent.slug, "slug2": self.parent.parent.slug, "slug3":self.parent.slug, "slug4":self.slug})
+    
 class Image_Legkovoe_Avto(models.Model): 
     avto = models.ForeignKey(Legkovoe_Avto, on_delete=models.CASCADE)
     images = models.FileField()
+    
