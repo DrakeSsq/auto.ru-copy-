@@ -3,6 +3,7 @@ from django.urls import reverse
 from mptt.models import MPTTModel, TreeForeignKey
 from django.utils.crypto import get_random_string
 from transliterate import slugify
+from django.contrib.auth.models import User
 
 
 class Transport(MPTTModel):
@@ -78,6 +79,7 @@ class Legkovoe_Avto(MPTTModel):
     type = TreeForeignKey(Transport, on_delete=models.PROTECT)
     marka = TreeForeignKey(Marka_Legkovoe_Avto, on_delete=models.PROTECT)
     parent = TreeForeignKey(Model_Legkovoe_Avto, on_delete=models.PROTECT)
+    author = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
 
     def save(self, *args, **kwargs):
         if not self.slug:

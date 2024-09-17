@@ -6,6 +6,13 @@ class Add_Legkovoe_Avto(forms.ModelForm):
     class Meta:
         model = Legkovoe_Avto
         fields = '__all__'
+        exclude = ('author',)
+
+        widgets = {
+            'marka': forms.HiddenInput(),
+            'type': forms.HiddenInput(),
+            'parent': forms.HiddenInput(),
+        }
 
 class Add_Image_Legkovoe_Avto(forms.ModelForm):
     class Meta:

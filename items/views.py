@@ -39,7 +39,13 @@ def index(request, slug1=None, slug2=None, slug3=None, slug4=None):
             return add_moto(request)
         
     
-    return render(request, 'index.html')
+    data = {
+        'title': 'Авто.ру',
+        'avto': Legkovoe_Avto.objects.all(),
+        'avto_image': Image_Legkovoe_Avto.objects.all(),
+    }    
+    
+    return render(request, 'index.html', data)
 
 
 
@@ -70,7 +76,9 @@ def add_avto_full(request, data):
         form_item = Add_Legkovoe_Avto(request.POST, request.FILES)
         form_image = Add_Image_Legkovoe_Avto(request.POST, request.FILES)
         if form_item.is_valid() and form_image.is_valid():
-            form = form_item.save()
+            form = form_item.save(commit=False)
+            form.author = request.user
+            form.save()
             for files in request.FILES.getlist('images'):
                 Image_Legkovoe_Avto.objects.create(avto=form, images=files)
             return redirect('home')

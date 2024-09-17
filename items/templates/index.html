@@ -1,7 +1,9 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<br>
+
+
+  <title>{{ title }}</title>
 
   {% if user.is_authenticated %}
   <a href="#">{{ user }}</a>
@@ -13,6 +15,23 @@
 
 
     <h1>Main page!  </h1>
-    <a href="add_item/">Добавить статью</a> <br>
+    <a href="add_item/">Добавить статью</a> <br> <hr>
 
+
+  {% for i in avto %}
+  {{i.title }} | {{ i.price }} Рублей <br>
+  {% for z in avto_image %}
+
+  {% if z.avto == i %}
+  <img src="{{z.images.url}}" class="img-thumbnail" alt="..." style="width: 175px;">
+
+  {% endif %}
+
+  {% endfor %} <br>
+  {{ i.author }}
+
+  <hr><br>
+<br>
+
+  {% endfor %}
 {% endblock %}

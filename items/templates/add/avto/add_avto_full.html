@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<h1>Добавление {{marka}} {{model}}</h1> <br>
     <form action="" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form_item.as_p }}
