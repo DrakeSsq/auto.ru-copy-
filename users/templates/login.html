@@ -9,7 +9,10 @@
     <form action="" method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button>Send!</button>
+        <button>Send!</button> 
+        <p><a href="{% url 'users:register' %}">Зарегестрироваться</a></p>
+        <p><a href="{% url 'users:password-reset' %}">Забыли пароль?</a></p>
+
     </form>
 </body>
 </html>

@@ -1,10 +1,17 @@
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
+from django.urls import reverse_lazy
 from .forms import *
 from django.contrib.auth.decorators import login_required
 # Create your views here.
+from django.contrib.auth import get_user_model
 
 def index(request, slug1=None, slug2=None, slug3=None, slug4=None):
+
+    # if slug1 == 'users':
+    #     if slug2 == 'login': return redirect(reverse('users:login'))
+    #     if slug2 == 'logout': return redirect(reverse('users:logout'))
+
     
     if slug1 == 'add_item':
 
@@ -31,7 +38,9 @@ def index(request, slug1=None, slug2=None, slug3=None, slug4=None):
         if slug2 == 'mototechnika':
             return add_moto(request)
         
+    
     return render(request, 'index.html')
+
 
 
 @login_required(login_url='users:login')
@@ -79,3 +88,4 @@ def add_avto_full(request, data):
 
 def add_moto(request):
     return HttpResponse('lol moto')
+

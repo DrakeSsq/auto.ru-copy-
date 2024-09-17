@@ -1,11 +1,11 @@
-from django.urls import path
+from django.urls import path, re_path
 from . import views
 
 urlpatterns = [
     path('', views.index, name='home'),
     path('add_item/', views.add_item, name='add_item'),
-    path('<slug:slug1>/', views.index, name='slug1'),
-    path('<slug:slug1>/<slug:slug2>/', views.index, name='slug2'),
-    path('<slug:slug1>/<slug:slug2>/<slug:slug3>/', views.index, name='slug3'),
-    path('<slug:slug1>/<slug:slug2>/<slug:slug3>/<slug:slug4>/', views.index, name='slug4'),
+    re_path(r'^(?!users)(?P<slug1>[-\w]+)/$', views.index, name='slug1'),
+    re_path(r'^(?!users)(?P<slug1>[-\w]+)/(?P<slug2>[-\w]+)/$', views.index, name='slug2'),
+    re_path(r'^(?!users)(?P<slug1>[-\w]+)/(?P<slug2>[-\w]+)/(?P<slug3>[-\w]+)/$', views.index, name='slug3'),
+    re_path(r'^(?!users)(?P<slug1>[-\w]+)/(?P<slug2>[-\w]+)/(?P<slug3>[-\w]+)/(?P<slug4>[-\w]+)/$', views.index, name='slug4'),
 ]
