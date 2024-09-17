@@ -7,9 +7,8 @@
 </head>
 <body>
     <h3>Add page!</h3>
-
-{% for x in type %}
-<a href="{{ x.slug }}">{{ x.title }} </a> <br>
-{% endfor %}
+    {% for i in type %}
+    <a href="{{i.slug}}">{{ i.title }}</a> <br>
+    {% endfor %}
 </body>
 </html>

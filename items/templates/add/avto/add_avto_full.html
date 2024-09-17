@@ -6,7 +6,11 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Main page!  </h1>
-    <a href="add_item/">Добавить статью</a>
+    <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form_item.as_p }}
+        {{ form_image.as_p }}
+        <button>send!</button>
+    </form>
 </body>
 </html>

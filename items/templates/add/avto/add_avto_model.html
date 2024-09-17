@@ -6,7 +6,11 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Main page!  </h1>
-    <a href="add_item/">Добавить статью</a>
+    models <hr>
+
+
+    {% for p in model %}
+    <a href="{{p.slug}}">{{ p.title }}</a> <br>
+    {% endfor %}
 </body>
 </html>

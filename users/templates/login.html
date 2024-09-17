@@ -6,11 +6,10 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="" method="post" enctype="multipart/form-data">
+    <form action="" method="post">
         {% csrf_token %}
-        {{ form_item.as_p }}
-        {{ form_image.as_p }}
-        <button type="submit">send!</button>
+        {{ form.as_p }}
+        <button>Send!</button>
     </form>
 </body>
 </html>

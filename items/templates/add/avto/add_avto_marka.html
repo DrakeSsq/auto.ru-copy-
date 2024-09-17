@@ -6,7 +6,8 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Main page!  </h1>
-    <a href="add_item/">Добавить статью</a>
+    {% for x in marka %}
+    <a href="{{x.slug}}">{{ x.title }}</a>
+    {% endfor %}
 </body>
 </html>
