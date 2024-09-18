@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<title>Модели марки {{ marka.title }}</title>
+
+<h1>Модели марки {{marka.title}} </h1>
+
+{% for i in model %}
+<p><a href="{{i.get_absolute_url}}">{{i.title}}</a></p>
+{% endfor %}
+<hr>
+
+
+<form action="" method="get">
+    {% csrf_token %}
+    {{ filter.form.as_p }}
+    <button>Send</button>
+</form>
+
+<hr>
+
+
+
+
+
+{% for i in filter.qs %}
+  {{i.title }} | {{ i.price }} Рублей <br> {{ i.year }} Года <br>{{i.city}}<br>
+
+  {% if car_image %}
+
+        {% for z in car_image %}
+
+        {% if z.avto == i %}
+
+                <img src="{{z.images.url}}" class="img-thumbnail" alt="none" style="width: 175px;">
+        
+        {% endif %}
+
+        {% endfor %} <br>
+
+  {% else %}
+
+        <p>Фотографии не найдены</p>
+
+  {% endif %}
+
+
+  {{ i.author }}
+  <hr>
+{% endfor %}
+
+
+{% endblock %}

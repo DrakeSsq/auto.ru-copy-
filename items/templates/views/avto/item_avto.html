@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Карточка товара {{car.title}}</h2>
+{{car.price}} Рублей <br>
+{{car.deskription}} <br>    
+
+{% if images %}
+{% for i in images %}
+
+<img src="{{ i.images.url }}" alt="Фотографии не найдены" width="150px">
+
+{% endfor %}
+
+{% else %}
+
+<p>Фотографии не найдены</p>
+
+{% endif %}
+
+{% endblock %}

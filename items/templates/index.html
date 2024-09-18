@@ -15,9 +15,23 @@
 
 
     <h1>Main page!  </h1>
-    <a href="add_item/">Добавить статью</a> <br> <hr>
+    <a href="add_item/">Добавить статью</a> <br>
 
 
+
+    <br><br><hr>
+
+
+
+
+    <h2>Легковые автомобили</h2>
+    {% for i in marka_legkovoe_avto %}
+    <p><a href="{{ i.get_absolute_url }}">{{i.title}}</a></p>
+    {% endfor %}
+
+
+
+<br><hr>
   {% for i in avto %}
   {{i.title }} | {{ i.price }} Рублей <br>
   {% for z in avto_image %}

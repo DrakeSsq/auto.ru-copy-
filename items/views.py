@@ -3,7 +3,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
 from .forms import *
 from django.contrib.auth.decorators import login_required
-# Create your views here.
+from .filters import *
 from django.contrib.auth import get_user_model
 
 def index(request, slug1=None, slug2=None, slug3=None, slug4=None):
@@ -38,11 +38,43 @@ def index(request, slug1=None, slug2=None, slug3=None, slug4=None):
         if slug2 == 'mototechnika':
             return add_moto(request)
         
+
+    if slug1 == 'legkovie-avtomobili':
+        if slug2 and not slug3 and not slug4:
+
+
+            car = Legkovoe_Avto.objects.filter(marka__slug=slug2)
+            car_image = Image_Legkovoe_Avto.objects.all()
+
+            model = Model_Legkovoe_Avto.objects.filter(parent__slug=slug2)
+            marka = slug2
+
+            filter = Legkovoe_Avto_Filter(request.GET, queryset=car)
+
+            return render(request, 'views/avto/selected_marka.html', {'car':car, 'marka':marka, 'model':model, 'car_image':car_image, 'filter':filter})
+        
+        if slug2 and slug3 and not slug4:
+            marka = slug2
+            model = slug3
+            car = Legkovoe_Avto.objects.filter(marka__slug=slug2, parent__slug=slug3)
+            return render(request, 'views/avto/selected_model_all.html', {"car":car, 'marka':marka, 'model':model})
+        
+        if slug4:
+            car = get_object_or_404(Legkovoe_Avto, slug=slug4)
+
+            images = Image_Legkovoe_Avto.objects.filter(avto=car)
+
+            return render(request, 'views/avto/item_avto.html', {"car":car, "images":images})
+        
     
     data = {
         'title': 'Авто.ру',
+
         'avto': Legkovoe_Avto.objects.all(),
+        'marka_legkovoe_avto': Marka_Legkovoe_Avto.objects.all(),
         'avto_image': Image_Legkovoe_Avto.objects.all(),
+
+        'filter': Legkovoe_Avto_Filter(request.GET, queryset=Legkovoe_Avto.objects.all())
     }    
     
     return render(request, 'index.html', data)

@@ -27,6 +27,15 @@ class Transport(MPTTModel):
         return reverse("slug1", kwargs={"slug1": self.slug})
     
 
+class City(models.Model):
+    title = models.CharField(max_length=255)
+    slug = models.SlugField(unique=True)
+
+    def __str__(self):
+        return self.title
+    
+
+
 class Marka_Legkovoe_Avto(MPTTModel):
     title = models.CharField(max_length=255)
     slug = models.SlugField(unique=True)
@@ -80,6 +89,10 @@ class Legkovoe_Avto(MPTTModel):
     marka = TreeForeignKey(Marka_Legkovoe_Avto, on_delete=models.PROTECT)
     parent = TreeForeignKey(Model_Legkovoe_Avto, on_delete=models.PROTECT)
     author = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+    city = models.ForeignKey(City, on_delete=models.DO_NOTHING, null=True, blank=True)
+    time_create = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+    time_update = models.DateTimeField(auto_now=True, null=True, blank=True)
+
 
     def save(self, *args, **kwargs):
         if not self.slug:

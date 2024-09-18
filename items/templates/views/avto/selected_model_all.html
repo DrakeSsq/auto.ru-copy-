@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Все автомобили {{marka.title}} {{model.title}}</h1>
+
+{% for i in car %}
+<a href="{{i.slug}}">{{ i.title }}</a> <br> {{ i.marka }} {{ i.parent }} <br>year: {{i.year}} <br> {{i.city}} <hr>
+{% endfor %}
+
+
+
+{% endblock %}

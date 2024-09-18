@@ -6,7 +6,7 @@ class Add_Legkovoe_Avto(forms.ModelForm):
     class Meta:
         model = Legkovoe_Avto
         fields = '__all__'
-        exclude = ('author',)
+        exclude = ('author', 'time_create', 'time_update',)
 
         widgets = {
             'marka': forms.HiddenInput(),
