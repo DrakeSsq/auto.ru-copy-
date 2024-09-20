@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h3>Test page</h3>
+
+{% for message in messages %}
+<p>{{message}}</p>
+{% endfor %}
+
+<form action="" method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+</form>
+
+{% endblock content %}

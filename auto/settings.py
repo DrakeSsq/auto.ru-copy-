@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'items', 'mptt', 'users',
-    'django_filters',
+    'django_filters', 'chat',
 ]
 
 MIDDLEWARE = [

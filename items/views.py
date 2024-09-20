@@ -5,6 +5,7 @@ from .forms import *
 from django.contrib.auth.decorators import login_required
 from .filters import *
 from django.contrib.auth import get_user_model
+from .models import *
 
 
 def profile(request):
@@ -18,6 +19,10 @@ def profile(request):
     return render(request, 'profile.html', {'user':user, 'form':form})
 
 def index(request, slug1=None, slug2=None, slug3=None, slug4=None):
+
+
+
+
 
     
     if slug1 == 'add_item':

@@ -16,3 +16,4 @@ admin.site.register(Marka_Legkovoe_Avto)
 admin.site.register(Model_Legkovoe_Avto)
 admin.site.register(Transport)
 admin.site.register(Image_Legkovoe_Avto)
+
