@@ -1,7 +1,7 @@
-from django.shortcuts import render
-from django.urls import reverse_lazy
+from django.shortcuts import get_object_or_404, render
+from django.urls import reverse, reverse_lazy
 from django.contrib.auth.views import LoginView
-from django.views.generic import CreateView  
+from django.views.generic import CreateView
 from users.forms import LoginUserForm
 from .forms import RegisterForm
 from django.contrib.auth import logout

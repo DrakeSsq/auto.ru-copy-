@@ -6,11 +6,18 @@ from django.contrib.auth.decorators import login_required
 from .filters import *
 from django.contrib.auth import get_user_model
 
-def index(request, slug1=None, slug2=None, slug3=None, slug4=None):
 
-    # if slug1 == 'users':
-    #     if slug2 == 'login': return redirect(reverse('users:login'))
-    #     if slug2 == 'logout': return redirect(reverse('users:logout'))
+def profile(request):
+    if request.method == 'POST':
+        form = ProfileUserForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+    else:
+        form = ProfileUserForm(instance=request.user)
+    user = request.user
+    return render(request, 'profile.html', {'user':user, 'form':form})
+
+def index(request, slug1=None, slug2=None, slug3=None, slug4=None):
 
     
     if slug1 == 'add_item':
@@ -37,6 +44,7 @@ def index(request, slug1=None, slug2=None, slug3=None, slug4=None):
 
         if slug2 == 'mototechnika':
             return add_moto(request)
+        
         
 
     if slug1 == 'legkovie-avtomobili':

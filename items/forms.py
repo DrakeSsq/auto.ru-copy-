@@ -1,6 +1,6 @@
 from django import forms
 from .models import *
-
+from django.contrib.auth import get_user_model
 
 class Add_Legkovoe_Avto(forms.ModelForm):
     class Meta:
@@ -22,3 +22,9 @@ class Add_Image_Legkovoe_Avto(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['images'].widget.attrs['multiple'] = True
+
+
+class ProfileUserForm(forms.ModelForm):
+    class Meta:
+        model = get_user_model()
+        fields = ['username', 'email', 'first_name', 'last_name']

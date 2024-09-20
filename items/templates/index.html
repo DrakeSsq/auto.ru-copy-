@@ -6,7 +6,7 @@
   <title>{{ title }}</title>
 
   {% if user.is_authenticated %}
-  <a href="#">{{ user }}</a>
+  <a href="{% url 'profile' %}">{{ user }}</a>
   <a href="{% url 'users:logout' %}">Выйти</a>
 
   {% else %}
